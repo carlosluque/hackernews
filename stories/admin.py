@@ -6,7 +6,7 @@ from stories.models import Story
 class StoryAdmin(admin.ModelAdmin):
 	list_display = ('title', 'domain', 'moderator', 'created_at', 'updated_at')
 	list_filter = ('created_at', 'updated_at')
-	search_fields = ('title', 'moderator__username', 'moderator_first_name', 'moderator_last_name')
+	search_fields = ('title', 'moderator__username', 'moderator__first_name', 'moderator__last_name')
 
 	fieldsets = [
 		('Story', {
