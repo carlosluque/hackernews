@@ -1,7 +1,6 @@
 import datetime
 
-from django.template import loader, Context
-from django.http import HttpResponse
+from django.shortcuts import render_to_response
 from django.utils.timezone import utc
 
 from stories.models import Story
@@ -18,10 +17,6 @@ def top_stories(top=180, consider=1000):
 	ranked_stories = sorted([(score(story), story) for story in lastest_stories], reverse=True)
 	return [story for _, story in ranked_stories][:top]
 
-
 def index(request):
 	stories = top_stories(top=30)
-	template = loader.get_template('index.html')
-	context = Context({'stories': stories})
-	response = template.render(context)
-	return HttpResponse(response)
+	return render_to_response('stories/index.html', {'stories': stories})
